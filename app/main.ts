@@ -1,16 +1,27 @@
-/**
- * 
- * 
- * 
- * 
- * 
- */
+import { Application } from "https://deno.land/x/oak/mod.ts";
+import router from "./router.ts";
 
-import { serve } from "https://deno.land/std@0.50.0/http/server.ts";
+const env = Deno.env.toObject();
+const HOST = env.HOST || "0.0.0.0";
+const port = Number.parseInt(env.PORT) || 8080;
 
-const s = serve({ port: 8080 }); // さっきコンテナに指定したポート
-console.log("localhost");
+// const app = new Application();
 
-for await (const req of s) {
-  req.respond({ body: "<h1>Hello Deno</h1>\n" });
-}
+// app.use(router.routes());
+// app.use(router.allowedMethods());
+
+// console.log(`Listening on port ${PORT} ...`);
+// await app.listen(`${HOST}:${PORT}`);
+
+// const port = 8000;
+const app = new Application();
+
+app.use((ctx) => {
+  ctx.response.body = "Hello Deno";
+});
+
+app.addEventListener("listen", () => {
+  console.log(`Listening on localhost:${port}`);
+});
+
+await app.listen({ port });

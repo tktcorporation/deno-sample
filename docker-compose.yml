@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   app:
-    image: hayd/alpine-deno:1.0.1
+    image: hayd/alpine-deno:1.3.1
     container_name: app
     working_dir: /app
     volumes:

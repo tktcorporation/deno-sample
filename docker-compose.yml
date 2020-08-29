@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  app:
+    image: hayd/alpine-deno:1.0.1
+    container_name: app
+    working_dir: /app
+    volumes:
+      - ./:/app:delegated
+    ports:
+      - "8080:8080"
